@@ -1,5 +1,5 @@
-# Distributed SSMF
-This repository houses a *Uncertainty-Aware Forecasting with Shifting Seasonal Matrix Factorization* model presented at IEEE HPEC 2025. 
+# Uncertainty SSMF
+This repository houses a *Uncertainty-Aware Forecasting with Shifting Seasonal Matrix Factorization* effort awaiting publication. 
 
 Joint work with [@breecummins](https://github.com/breecummins).
 
