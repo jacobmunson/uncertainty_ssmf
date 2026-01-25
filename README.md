@@ -1,16 +1,11 @@
-# uncertainty_ssmf
-
-Under construction!!!
-
-
 # Distributed SSMF
-This repository houses a [Distributed Shifting Seasonal Matrix Factorization](https://ieeexplore.ieee.org/document/11196218) model presented at IEEE HPEC 2025. 
+This repository houses a *Uncertainty-Aware Forecasting with Shifting Seasonal Matrix Factorization* model presented at IEEE HPEC 2025. 
 
 Joint work with [@breecummins](https://github.com/breecummins).
 
 Paper abstract:
 
-> Forecasting methods ingest time series data and provide a prediction of future events. One sophisticated forecasting algorithm is called the Shifting Seasonal Matrix Factorization (SSMF) method, which is notable for its ability to model repeating patterns in data as well as abrupt global changes in system behavior (regime shifts). SSMF as originally implemented does not scale well with input data size. To address this issue, we provide an MPI parallelization scheme with 2D matrix partitioning, sparsity-awareness, and better regime lifecycle management. We demonstrate the improved scaling and performance using NYC taxicab and rideshare data.
+> Uncertainty estimation remains a difficult problem in machine learning. Where possible, principled uncertainty estimation often requires extensive model alterations, repeated model runs, or expensive sampling-based methods. In this paper, we extend the existing Shifting Seasonal Matrix Factorization (SSMF) model to include meaningful uncertainty estimates without major model modifications. We use a conformal prediction framework with multiple variants to estimate prediction intervals based on a user-specified quantile. Our results show that permitting time-dependent variance in model residuals accurately models coverage over tight prediction intervals.
 
 
 ## To install:
@@ -20,7 +15,7 @@ conda env create -f environment.yml
 
 ## Activate environment & dependencies:
 ```
-source ./activate_distributed_env.sh
+source ./activate_uncertainty_env.sh
 ```
 (see the referenced file for specific module dependencies)
 
@@ -37,42 +32,18 @@ I used these files:
 - fhv_tripdata_2020-03.parquet
 - fhv_tripdata_2020-04.parquet
 
-Clean data with notebook:
+Clean data with notebook (found in another related repo - https://github.com/jacobmunson/distributed_ssmf/tree/main):
 ```
 nytaxi_processing.ipynb
 ```
 
-### Create Scaled Dataset (optional)
 
-This is required for scaling experiments, but can be skipped when just getting the model up and running on the above dataset(s) produced from the notebook.
-
-Use the script:
-```
-scale_data.py
-```
-
-Example run to create a new synthetic dataset with 10x matrix dimensions:
-```
-python scale_dataset.py taxi_yellow_green_rideshare_march_to_apr2020_triplets.parquet scaled_data10x.parquet --scaling-factor 10
-```
 
 ## Models
 
-### 1. Baseline SSMF model:
+### 1. Baseline SSMF 
 
-See:
-  - Repo: https://github.com/kokikwbt/ssmf/tree/main
-  - Paper: https://proceedings.neurips.cc/paper/2021/hash/1fb2a1c37b18aa4611c3949d6148d0f8-Abstract.html
-
-Our slight alteration designed to accumulate forecasts at each step:
-```
-ssmf_forecast.py
-```
-This uses `ncp.py` from the original SSMF repository. We include a slightly (non-substantively) modified version in this repository.
-
-### 2. SSMF Tuples
-
-This is our version of SSMF that accepts a tuple stream of input. Can be found in:
+This is the tuple version of SSMF that accepts a tuple stream of input. Can be found in:
 ```
 ssmf_tuples.py
 ```
@@ -81,13 +52,4 @@ You can run via:
 python ssmf_tuples.py taxi_yellow_green_rideshare_distinct_march_to_apr2020_triplets.parquet
 ```
 
-### 3. Distributed SSMF
 
-Our Distributed SSMF model is found in:
-```
-ssmf_mpi_2d_dist_init.py
-```
-This includes the Distributed NCP initialization model `ncp_distributed_2d()` , which is in the above script. Supporting functions are found in:
-```
-ncp_distributed.py
-```
