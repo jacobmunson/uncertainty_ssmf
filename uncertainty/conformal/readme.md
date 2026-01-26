@@ -11,3 +11,5 @@ uncertainty/conformal/
     binwise.py           # binwise-by-magnitude dual-buffers 
     
     hetero.py            # a+b*sqrt(yhat) scaler dual-buffers
+
+    quantile.py          # method for finite-sample conformal quantiles
