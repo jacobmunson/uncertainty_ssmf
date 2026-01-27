@@ -13,4 +13,4 @@ module load OpenMPI/4.1.6-GCC-13.2.0
 source ~/.bashrc
 
 # Activate the desired conda environment
-conda activate UncertaintySSMF_env
+conda activate UncertaintySSMF2_env
