@@ -7,14 +7,6 @@ try:
 except Exception:
     _HET_AVAILABLE = False
 
-from ..ensemble.bestn_regimes import BestNRegimeStrategy
-from ..ensemble.inject_noise import InjectNoiseEnsembleStrategy  
-from ..ensemble.kmodels import KModelEnsembleStrategy  
-from ..ensemble.mc_dropout import MCDropoutEnsembleStrategy
-from ..ensemble.kruns import KRunsDataEnsembleStrategy
-from ..ensemble.factorvar import FactorVarianceStrategy
-
-
 def make_strategy(mode: str, **kwargs):
     m = (mode or "homo").lower()
     if m in ("homo",):
