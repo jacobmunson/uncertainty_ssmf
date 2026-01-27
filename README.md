@@ -53,3 +53,39 @@ python ssmf_tuples.py taxi_yellow_green_rideshare_distinct_march_to_apr2020_trip
 ```
 
 
+
+### 2. Experiments
+
+#### 2.1 Oracle
+Run the following:
+```
+python scripts/run_realdata_strategies.py   taxi_yellow_green_rideshare_distinct_march_to_apr2020_triplets.parquet --modes homo,binwise,hetero --periodicity 168 --n_components 10 --init_cycles 3 --conf_alpha 0.10 --conf_buf 100000 --zero_samples 3000 --zero_top_frac 0.6 --zero_pool_mult 10 --out_root out_real/all3cv1oracle --bin_edges 0,1,2,3,5,8,13,21,34,55,89
+```
+Use output directories `--out_root out_real/all3cv<1,2,3,4,5>oracle` to obtain the five Oracle evaluations in the paper.
+
+
+#### 2.2 Non-oracle (Ex-ante)
+
+##### 2.2.1 Homoskedastic Conformal
+Example command for the homoskedastic results varying the threshold $\tau$: 
+```
+python scripts/run_realdata_strategies.py taxi_yellow_green_rideshare_distinct_march_to_apr2020_triplets.parquet  --modes homo  --periodicity 168  --n_components 10  --init_cycles 3  --conf_alpha 0.10  --conf_buf 100000  --zero_samples 3000  --zero_top_frac 0.6  --zero_pool_mult 10  --out_root out_real/homo_tau05/homo1tau05cv1  --exante_tau 0.5
+```
+Use output directories `--out_root out_real/homo_tau05/homo1tau05cv<1,2,3,4,5>` to obtain the five non-oracle evaluations in the paper. Vary the "tau" portion of the directory, along with the `--exante_tau 0.5` argument
+
+
+##### 2.2.2 Binwise Conformal
+
+Command for the binwise results: 
+```
+python scripts/run_realdata_strategies.py taxi_yellow_green_rideshare_distinct_march_to_apr2020_triplets.parquet  --modes binwise  --periodicity 168  --n_components 10  --init_cycles 3  --conf_alpha 0.10  --conf_buf 100000  --zero_samples 3000  --zero_top_frac 0.6  --zero_pool_mult 10  --out_root out_real/binwise_nonoracle/binwise_nonoracle_cv1  --bin_edges 0,1,2,3,5,8,13,21,34,55,89 
+```
+Use output directories `--out_root out_real/binwise_nonoracle/binwise_nonoracle_cv<1,2,3,4,5>` to obtain the five non-oracle evaluations in the paper.
+
+##### 2.2.3 Heteroskedastic Conformal
+
+Command for the heteroskedastic results: 
+```
+python scripts/run_realdata_strategies.py taxi_yellow_green_rideshare_distinct_march_to_apr2020_triplets.parquet  --modes hetero  --periodicity 168  --n_components 10  --init_cycles 3  --conf_alpha 0.10  --conf_buf 100000  --zero_samples 3000  --zero_top_frac 0.6  --zero_pool_mult 10  --out_root out_real/hetero_nonoracle/hetero_nonoracle_cv1
+```
+Use output directories `--out_root out_real/hetero_nonoracle/hetero_nonoracle_cv<1,2,3,4,5>` to obtain the five non-oracle evaluations in the paper.
