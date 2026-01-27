@@ -12,6 +12,7 @@ Paper abstract:
 ```
 conda env create -f environment.yml
 ```
+Note that module used on the local HPC cluster (see below) might need to be activated prior to environment creation.
 
 ## Activate environment & dependencies:
 ```
