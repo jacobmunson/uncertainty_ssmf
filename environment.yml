@@ -1,4 +1,4 @@
-name: UncertaintySSMF_env
+name: UncertaintySSMF2_env
 channels:
   - defaults
   - conda-forge
