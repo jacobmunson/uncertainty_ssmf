@@ -1,5 +1,5 @@
 # Uncertainty SSMF
-This repository houses an *Uncertainty-Aware Forecasting with Shifting Seasonal Matrix Factorization* effort awaiting publication. 
+This repository houses an *Uncertainty-Aware Forecasting with Shifting Seasonal Matrix Factorization* effort presented at [IEEE ICAD 2026](https://ieee-icad.org/).
 
 Joint work with [@breecummins](https://github.com/breecummins).
 
